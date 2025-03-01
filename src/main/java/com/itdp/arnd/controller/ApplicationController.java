@@ -1,5 +1,7 @@
 package com.itdp.arnd.controller;
 
+import com.itdp.arnd.dto.GetCurrency;
+import com.itdp.arnd.service.RateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,6 +21,8 @@ import com.itdp.arnd.service.GetBalanceService;
 import com.itdp.arnd.service.TransactionService;
 import com.itdp.arnd.utils.ResponseUtil;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*") 
 @RestController
 @RequestMapping("/api/v1")
@@ -29,6 +33,9 @@ public class ApplicationController {
     
     @Autowired
     GetBalanceService getBalanceService;
+
+    @Autowired
+    RateService rateService;
 
     @PostMapping("/createTransaction")
     public ResponseEntity<ApiResponse<Transactions>> createTransaction (@RequestBody ReqCreateTransaction request) {
@@ -42,5 +49,11 @@ public class ApplicationController {
         return ResponseEntity.ok(ResponseUtil.success("Balance retrieved successfully", response));
     }
 
+    @GetMapping("/getRates")
+    public ResponseEntity<ApiResponse<List<GetCurrency>>> getRate(){
+        List<GetCurrency> currency = rateService.getRate();
+
+        return ResponseEntity.ok(ResponseUtil.success("currency retrieved successfully", currency));
+    }
     
 }
