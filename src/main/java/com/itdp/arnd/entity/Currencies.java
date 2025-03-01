@@ -29,6 +29,9 @@ public class Currencies {
     @Column(name = "currency_rate")
     private Double currencyRate;
 
+    @Column(name = "is_primary")
+    private Boolean isPrimary;
+
     @Column(name = "created_at")
     private Instant createdAt;
 
