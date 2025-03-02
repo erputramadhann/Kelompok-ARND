@@ -18,4 +18,7 @@ public class GetCurrency {
 
     @JsonProperty("updated_at")
     private Instant updatedAt;
+    
+    @JsonProperty("is_primary")
+    private Boolean isPrimary;
 }

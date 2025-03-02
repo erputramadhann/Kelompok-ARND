@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class RateService {
+public class CurrencyService {
     @Autowired
     CurrencyRepository currencyRepository;
 
@@ -25,6 +25,7 @@ public class RateService {
                     dto.setCode(currency.getCode());
                     dto.setCurrencyRate(currency.getCurrencyRate());
                     dto.setUpdatedAt(currency.getUpdatedAt());
+                    dto.setIsPrimary(currency.getIsPrimary());
                     return dto;
                 })
                 .collect(Collectors.toList());

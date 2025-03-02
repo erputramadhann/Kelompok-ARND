@@ -20,7 +20,7 @@ import com.itdp.arnd.repository.CurrencyRepository;
 import com.itdp.arnd.repository.UsersRepository;
 
 @Service
-public class GetBalanceService {
+public class BankUserService {
 
     @Autowired
     BalanceRepository balanceRepository;
@@ -37,7 +37,6 @@ public class GetBalanceService {
     public BalanceData getBalance(String param){
         BankUsers response = new BankUsers();
         Users dataUser = new Users();
-        BankBalances dataBankBalance = new BankBalances();
         Currencies dataCurrencies = new Currencies();
         try {
             response = bankUserRepository.findById(Integer.valueOf(param)).get();
@@ -46,10 +45,9 @@ public class GetBalanceService {
             Instant updatenya = response.getUpdatedAt();
             
             dataUser = usersRepository.findAllById(Integer.valueOf(userId));
-            // System.out.println("response: " + datanya);
             String namanya = dataUser.getName();
 
-            List<BankBalances> bankBalances = balanceRepository.findAllById(Integer.valueOf(param));
+            List<BankBalances> bankBalances = balanceRepository.findAllByBankUserId(Integer.valueOf(param));
             List<FormatBalance> balances = new ArrayList<>();
             for (BankBalances balancesnya : bankBalances) {
                 Double balance = balancesnya.getBalance();

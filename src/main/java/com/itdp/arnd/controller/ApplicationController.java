@@ -1,7 +1,6 @@
 package com.itdp.arnd.controller;
 
 import com.itdp.arnd.dto.GetCurrency;
-import com.itdp.arnd.service.RateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itdp.arnd.dto.ApiResponse;
 import com.itdp.arnd.dto.BalanceData;
 import com.itdp.arnd.dto.ReqCreateTransaction;
-// import com.itdp.arnd.entity.BankUsers;
 import com.itdp.arnd.entity.Transactions;
-import com.itdp.arnd.service.GetBalanceService;
+import com.itdp.arnd.service.BankUserService;
+import com.itdp.arnd.service.CurrencyService;
 import com.itdp.arnd.service.TransactionService;
 import com.itdp.arnd.utils.ResponseUtil;
 
@@ -32,10 +31,10 @@ public class ApplicationController {
     TransactionService transactionService;
     
     @Autowired
-    GetBalanceService getBalanceService;
+    BankUserService bankUserService;
 
     @Autowired
-    RateService rateService;
+    CurrencyService currencyService;
 
     @PostMapping("/createTransaction")
     public ResponseEntity<ApiResponse<Transactions>> createTransaction (@RequestBody ReqCreateTransaction request) {
@@ -45,13 +44,13 @@ public class ApplicationController {
 
     @GetMapping("/getBalance")
     public ResponseEntity<ApiResponse<BalanceData>> getBalance(@RequestParam String bank_user_id) {
-        BalanceData response = getBalanceService.getBalance(bank_user_id);
+        BalanceData response = bankUserService.getBalance(bank_user_id);
         return ResponseEntity.ok(ResponseUtil.success("Balance retrieved successfully", response));
     }
 
     @GetMapping("/getRates")
     public ResponseEntity<ApiResponse<List<GetCurrency>>> getRate(){
-        List<GetCurrency> currency = rateService.getRate();
+        List<GetCurrency> currency = currencyService.getRate();
 
         return ResponseEntity.ok(ResponseUtil.success("currency retrieved successfully", currency));
     }

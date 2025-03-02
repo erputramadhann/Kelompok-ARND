@@ -10,6 +10,7 @@ import com.itdp.arnd.entity.BankBalances;
 import com.itdp.arnd.entity.Currencies;
 import com.itdp.arnd.entity.Transactions;
 import com.itdp.arnd.exception.InvalidExchangeCurrency;
+import com.itdp.arnd.exception.InvalidInputValue;
 import com.itdp.arnd.exception.NotEnoughBalance;
 import com.itdp.arnd.repository.BalanceRepository;
 import com.itdp.arnd.repository.CurrencyRepository;
@@ -37,6 +38,9 @@ public class TransactionService {
         BankBalances bankBalanceSell = balanceRepository.findByBankUserIdAndCurrencyId(request.getBankUserId(), request.getSellCurrencyId());
         BankBalances bankBalanceBuy = balanceRepository.findByBankUserIdAndCurrencyId(request.getBankUserId(), request.getBuyCurrencyId());
         Double result_value = 0.0;
+        if (request.getStartValue() <= 0) {
+            throw new InvalidInputValue();
+        }
         if (bankBalanceSell.getBalance() < request.getStartValue()) {
             throw new NotEnoughBalance();
         }
