@@ -165,13 +165,13 @@
                         <tbody>
                 `;
 
-                data.datas.forEach(rate => {
+                data.data.forEach(rate => {
                     table += `
                         <tr>
                             <td>${rate.id}</td>
                             <td>${rate.name}</td>
-                            <td>${rate.code}</td>
-                            <td>${rate.rate.toLocaleString()}</td>
+                            <td>${rate.currency_code}</td>
+                            <td>${rate.currency_rate.toLocaleString()}</td>
                             <td>${rate.updated_at}</td>
                         </tr>
                     `;
