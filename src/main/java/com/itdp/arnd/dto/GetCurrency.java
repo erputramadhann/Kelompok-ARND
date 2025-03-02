@@ -1,6 +1,5 @@
 package com.itdp.arnd.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.time.Instant;
@@ -18,7 +17,7 @@ public class GetCurrency {
 
     @JsonProperty("updated_at")
     private Instant updatedAt;
-    
+
     @JsonProperty("is_primary")
     private Boolean isPrimary;
 }
