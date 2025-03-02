@@ -1,6 +1,9 @@
 package com.itdp.arnd.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
 import lombok.Data;
+
+import java.time.Instant;
 
 @Data
 public class GetCurrency {
@@ -12,4 +15,7 @@ public class GetCurrency {
 
     @JsonProperty("currency_rate")
     private Double currencyRate;
+
+    @JsonProperty("updated_at")
+    private Instant updatedAt;
 }

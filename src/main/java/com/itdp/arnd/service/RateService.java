@@ -24,6 +24,7 @@ public class RateService {
                     dto.setName(currency.getName());
                     dto.setCode(currency.getCode());
                     dto.setCurrencyRate(currency.getCurrencyRate());
+                    dto.setUpdatedAt(currency.getUpdatedAt());
                     return dto;
                 })
                 .collect(Collectors.toList());
